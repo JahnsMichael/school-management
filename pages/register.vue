@@ -1,6 +1,6 @@
 <template>
   <div class="login-form-container">
-    <h1>Login</h1>
+    <h1>Register</h1>
     <form>
       <div>
         <label for="email">Email</label>
@@ -9,10 +9,14 @@
       <div>
         <label for="password">Password</label>
         <input type="password" name="password" placeholder="password"/>
+      </div>      
+      <div>
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" name="confirm-password" placeholder="confirm password"/>
       </div>
       <button>Login</button>
     </form>
-    <p>Doesn't have an account? <nuxt-link to="/register">Register now.</nuxt-link></p>
+    <p>Already have an account? <nuxt-link to="/login">Login now.</nuxt-link></p>
   </div>
 </template>
 

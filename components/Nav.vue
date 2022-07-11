@@ -80,13 +80,12 @@ export default {
 
 nav {
   padding: 0.2rem 1rem;
-  margin: 0.5rem;
   background: rgb(0, 68, 255);
   box-shadow: 0px 0px 20px grey;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  border-radius: 0.5rem;
+  flex-grow: 2;
 }
 
 nav > * {
@@ -128,7 +127,7 @@ span {
   .navbar {
     display: block;
     height: fit-content;
-    flex-grow: 2;
+    flex-grow: 0;
   }
 
   nav {

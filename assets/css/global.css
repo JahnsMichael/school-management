@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
+* {
+  list-style: none;
+  text-decoration: none;
+  font-family: 'Quicksand', sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(0, 68, 255);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(0, 68, 255);
+}
