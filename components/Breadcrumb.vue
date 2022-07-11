@@ -35,8 +35,6 @@ export default {
         }
       })
 
-      console.log(crumbs)
-
       return crumbs
     },
   },

@@ -125,12 +125,14 @@ span {
 }
 
 @media (max-width: 600px) {
-  nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
+  .navbar {
+    display: block;
     height: fit-content;
-    width: 100%;
+    flex-grow: 2;
+  }
+
+  nav {
+    height: fit-content;
     flex-direction: row;
     justify-content: space-around;
     padding: 1rem;
