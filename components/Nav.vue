@@ -12,12 +12,6 @@
       </div>
       <nuxt-link to="/" class="nav-link">
         <span :class="currentlyActive.includes('index') ? 'active' : ''"
-          ><home-icon></home-icon
-        ></span>
-        <div class="label" v-if="isShowing">Home</div>
-      </nuxt-link>
-      <nuxt-link to="/my-course" class="nav-link">
-        <span :class="currentlyActive.includes('my-course') ? 'active' : ''"
           ><book-icon></book-icon
         ></span>
         <div class="label" v-if="isShowing">My Course</div>
@@ -33,13 +27,7 @@
 </template>
 
 <script>
-import {
-  HomeIcon,
-  UserIcon,
-  BookIcon,
-  XIcon,
-  MenuIcon,
-} from 'vue-feather-icons'
+import { UserIcon, BookIcon, XIcon, MenuIcon } from 'vue-feather-icons'
 
 export default {
   data() {
@@ -62,7 +50,6 @@ export default {
     this.currentlyActive = this.$route.name
   },
   components: {
-    HomeIcon,
     UserIcon,
     BookIcon,
     XIcon,

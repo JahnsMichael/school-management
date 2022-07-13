@@ -1,24 +1,54 @@
 <template>
   <div class="login-form-container">
     <h1>Login</h1>
-    <form>
+    <form @submit.prevent="userLogin">
       <div>
-        <label for="email">Email</label>
-        <input type="email" name="email" placeholder="email"/>
+        <label for="username">Username</label>
+        <input
+          type="username"
+          name="username"
+          placeholder="username"
+          v-model="login.username"
+        />
       </div>
       <div>
         <label for="password">Password</label>
-        <input type="password" name="password" placeholder="password"/>
+        <input
+          type="password"
+          name="password"
+          placeholder="password"
+          v-model="login.password"
+        />
       </div>
-      <button>Login</button>
+      <button type="submit">Login</button>
     </form>
-    <p>Doesn't have an account? <nuxt-link to="/register">Register now.</nuxt-link></p>
+    <p>
+      Doesn't have an account?
+      <nuxt-link to="/register">Register now.</nuxt-link>
+    </p>
   </div>
 </template>
 
 <script>
 export default {
   layout: 'login',
+  data() {
+    return {
+      login: {
+        username: '',
+        password: '',
+      },
+    }
+  },
+  methods: {
+    async userLogin() {
+      try {
+        await this.$auth.loginWith('local', { data: this.login })
+      } catch (err) {
+        console.log(err)
+      }
+    },
+  },
 }
 </script>
 
