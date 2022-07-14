@@ -16,6 +16,16 @@
         ></span>
         <div class="label" v-if="isShowing">My Course</div>
       </nuxt-link>
+      <nuxt-link
+        v-if="this.$auth.user.groups[0].name === 'Officer'"
+        to="/accounts"
+        class="nav-link"
+      >
+        <span :class="currentlyActive.includes('accounts') ? 'active' : ''"
+          ><user-icon></user-icon
+        ></span>
+        <div class="label" v-if="isShowing">Manage Account</div>
+      </nuxt-link>
       <nuxt-link to="/profile" class="nav-link end">
         <span :class="currentlyActive.includes('profile') ? 'active' : ''"
           ><user-icon></user-icon

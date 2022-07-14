@@ -5,6 +5,9 @@
     <p>Username: {{ username }}</p>
     <p>Email: {{ email }}</p>
     <p>Role: {{ group }}</p>
+    <nuxt-link to="/login">
+      <button>Logout</button>
+    </nuxt-link>
   </div>
 </template>
 
@@ -26,16 +29,17 @@ export default {
     this.username = this.$auth.user.username
     this.email = this.$auth.user.email
 
-    const group_id = this.$auth.user.groups[0]
-    if (group_id === 1) {
-      this.group = 'Student'
-    } else if (group_id === 2) {
-      this.group = 'Teacher'
-    } else if (group_id === 3) {
-      this.group = 'Officer'
-    } else {
-      this.group = ''
-    }
+    this.group = this.$auth.user.groups[0] ? this.$auth.user.groups[0].name : 'Not activated yet, please contact the administrator.'
   },
 }
 </script>
+
+<style scoped>
+button {
+  background-color: rgb(204, 33, 33);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+</style>

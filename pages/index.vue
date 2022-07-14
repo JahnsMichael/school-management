@@ -2,6 +2,7 @@
   <div>
     <div v-if="error === ''">
       <h1>My Courses</h1>
+      <p v-if="ownedCourses.length === 0">You don't have any courses. Please enroll from the available course in the "All Courses" section.</p>
       <nuxt-link
         v-for="(course, index) in ownedCourses"
         :key="`ownedCourses-${index}`"
@@ -14,6 +15,7 @@
         />
       </nuxt-link>
       <h1>All Courses</h1>
+      <p v-if="allCourses.length === 0">There are no available course yet.</p>
       <nuxt-link
         v-for="(course, index) in allCourses"
         :key="`allCourses-${index}`"
@@ -56,10 +58,12 @@ export default {
 
       if (res_courses.status === 200) {
         this.allCourses = res_courses.data
+        console.log(this.allCourses.length)
       }
 
       if (res_courses_owned.status === 200) {
         this.ownedCourses = res_courses_owned.data
+        console.log(this.ownedCourses.length)
       }
     } catch (err) {
       this.error = err.response.data['detail']
