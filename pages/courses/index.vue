@@ -14,6 +14,7 @@
           :description="course.description"
         />
       </nuxt-link>
+      <nuxt-link v-if="this.$auth.user.groups && this.$auth.user.groups[0].name === 'Teacher'" class="new-courses-btn" to="/courses/new">+ Create New Courses</nuxt-link>
       <h1>All Courses</h1>
       <p v-if="allCourses.length === 0">There are no available course yet.</p>
       <nuxt-link
