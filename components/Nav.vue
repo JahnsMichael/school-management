@@ -11,7 +11,7 @@
         </div>
       </div>
       <nuxt-link to="/courses" class="nav-link">
-        <span :class="currentlyActive.includes('index') ? 'active' : ''"
+        <span :class="currentlyActive.includes('courses') ? 'active' : ''"
           ><book-icon></book-icon
         ></span>
         <div class="label" v-if="isShowing">My Course</div>
