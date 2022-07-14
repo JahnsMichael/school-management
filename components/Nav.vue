@@ -10,14 +10,14 @@
           <h4>School Management System</h4>
         </div>
       </div>
-      <nuxt-link to="/" class="nav-link">
+      <nuxt-link to="/courses" class="nav-link">
         <span :class="currentlyActive.includes('index') ? 'active' : ''"
           ><book-icon></book-icon
         ></span>
         <div class="label" v-if="isShowing">My Course</div>
       </nuxt-link>
       <nuxt-link
-        v-if="this.$auth.user.groups[0].name === 'Officer'"
+        v-if="this.$auth.user.groups[0] && this.$auth.user.groups[0].name === 'Officer'"
         to="/accounts"
         class="nav-link"
       >

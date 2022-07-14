@@ -58,12 +58,10 @@ export default {
 
       if (res_courses.status === 200) {
         this.allCourses = res_courses.data
-        console.log(this.allCourses.length)
       }
 
       if (res_courses_owned.status === 200) {
         this.ownedCourses = res_courses_owned.data
-        console.log(this.ownedCourses.length)
       }
     } catch (err) {
       this.error = err.response.data['detail']

@@ -42,7 +42,7 @@ export default {
     const group_id = this.$auth.user.groups[0].name
     if (group_id !== 'Officer') {
       this.$router.push({
-        path: '/',
+        path: '/courses',
       })
     }
   },

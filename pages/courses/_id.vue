@@ -4,6 +4,14 @@
       <h1>{{ course.name }}</h1>
       <p>{{ course.description }}</p>
       <p>Currently this course has no content yet.</p>
+      <div v-if="this.$auth.user.id === course.author.id">
+        <h3>Student Enrollment Request</h3>
+        <p v-if="enrollmentRequest.length === 0"> There is no enrollment request left.</p>
+        <div v-for="(request, index) in enrollmentRequest" :key="index">
+          {{ request.user.first_name }} {{ request.user.last_name }}
+          <button @click="grantAccess(request.id)">Accept</button>
+        </div>
+      </div>
     </div>
     <div v-if="!course.owned">
       <p>
@@ -38,8 +46,10 @@ export default {
       course: {
         name: '',
         description: '',
+        author: {},
       },
       enrollmentKey: '',
+      enrollmentRequest: [],
     }
   },
   methods: {
@@ -56,15 +66,57 @@ export default {
     },
     async requestAccess() {
       const res = await this.$axios.post(
-        `/enroll-request/?course-id=${this.$route.params.id}`)
+        `/enroll-request/?course-id=${this.$route.params.id}`
+      )
       if (res.status === 200) {
         this.$router.go()
       }
     },
+    async grantAccess(reqId) {
+      const res = await this.$axios.delete(`/enroll-request/${reqId}/`)
+      if (res.status === 200) {
+        this.$router.go()
+      }
+
+      try {
+        const res = await this.$axios.get(
+          `/enroll-request/?course-id=${this.$route.params.id}`
+        )
+        if (res.status === 200) {
+          this.enrollmentRequest = res.data
+        }
+      } catch (error) {
+        console.log(error.response.data)
+      }
+    },
   },
   async fetch() {
-    const res = await this.$axios.get(`/courses/${this.$route.params.id}/`)
-    this.course = res.data
+    try {
+      const res = await this.$axios.get(`/courses/${this.$route.params.id}/`)
+
+      if (res.status === 200) {
+        this.course = res.data
+      }
+    } catch (error) {
+      console.log(error.response.data)
+    }
+
+    if (
+      this.$auth.user.groups &&
+      this.$auth.user.groups[0].name === 'Teacher' &&
+      this.$auth.user.id === this.course.author.id
+    ) {
+      try {
+        const res = await this.$axios.get(
+          `/enroll-request/?course-id=${this.$route.params.id}`
+        )
+        if (res.status === 200) {
+          this.enrollmentRequest = res.data
+        }
+      } catch (error) {
+        console.log(error.response.data)
+      }
+    }
   },
 }
 </script>

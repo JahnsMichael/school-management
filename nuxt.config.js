@@ -46,7 +46,7 @@ export default {
     redirect: {
       login: '/login',
       logout: false,
-      home: '/',
+      home: '/courses',
     },
     strategies: {
       local: {
