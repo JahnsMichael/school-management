@@ -22,6 +22,7 @@
       </div>
       <button type="submit">Login</button>
     </form>
+    <p class="error">{{ error }}</p>
     <p>
       Doesn't have an account?
       <nuxt-link to="/register">Register now.</nuxt-link>
@@ -38,14 +39,20 @@ export default {
         username: '',
         password: '',
       },
+      error: '',
     }
   },
   methods: {
     async userLogin() {
       try {
-        await this.$auth.loginWith('local', { data: this.login })
+        const res = await this.$auth.loginWith('local', { data: this.login })
+        if (res.status === 201) {
+          this.$router.push({
+            path: '/login',
+          })
+        }
       } catch (err) {
-        console.log(err)
+        this.error = err.response.data['detail']
       }
     },
   },
@@ -96,6 +103,11 @@ button {
   box-shadow: 0px 0px 5px grey;
   padding: 0.5rem;
   margin: 0.7rem;
+}
+
+.error {
+  color: red;
+  font-size: 0.75rem;
 }
 
 @media (max-width: 600px) {
